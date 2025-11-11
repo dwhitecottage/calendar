@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Homestay Calendars — Embed Ready (Side-by-side)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --page-bg: #d2cfae;
+      --brand-dark:#615d43;--brand-gold:#bebc57;--book-btn-1:#8B4513;--book-btn-2:#A0522D
+    }
+    html,body{height:100%;margin:0;font-family:'Montserrat',Arial,sans-serif;background:var(--page-bg)}
+    .calendar-day{transition:all .18s ease}
+    .calendar-day:hover{transform:scale(1.04)}
+    .available{background:var(--brand-gold);cursor:pointer;color:#fff}
+    .booked{background:#dc2626;color:#fff;cursor:not-allowed}
+    .today{border:3px solid var(--brand-dark)}
+    /* Framed look for embed */
+    .frame{border:6px solid rgba(0,0,0,0.06);border-radius:12px;background:#fff;padding:16px;box-shadow:0 8px 30px rgba(0,0,0,0.08)}
+  </style>
+</head>
+<body>
+  <div class="min-h-full py-8 px-4 max-w-6xl mx-auto">
+    <div class="flex flex-col md:flex-row gap-6">
+
+      <!-- Calendar A -->
+      <div class="frame flex-1" id="frameA">
+        <div class="text-center mb-4">
+          <h1 id="homestayTitle_A" class="text-2xl font-bold" style="color:var(--brand-dark)">D White Cottage Homestay A</h1>
+          <p id="locationText_A" class="text-sm text-gray-600">Pengkalan Balak, Melaka</p>
+        </div>
+
+        <div class="flex items-center justify-between gap-4 mb-4">
+          <div class="flex items-center gap-4">
+            <div class="flex items-center"><div id="legendAvailable_A" class="w-4 h-4 rounded mr-2" style="background-color:var(--brand-gold)"></div><span class="text-sm">Available (click to book)</span></div>
+            <div class="flex items-center"><div class="w-4 h-4 bg-red-600 rounded mr-2"></div><span class="text-sm">Booked</span></div>
+          </div>
+          <div class="flex items-center gap-3">
+            <a id="bookNowButton_A" class="inline-block px-4 py-2 text-sm font-semibold text-white rounded shadow-lg hover:shadow-xl transition-transform transform hover:scale-105" href="#" target="_blank" rel="noopener noreferrer" style="background:linear-gradient(135deg,var(--book-btn-1) 0%,var(--book-btn-2) 100%);">Book Now</a>
+            <button data-cal="A" class="ownerAccess text-sm text-gray-500 hover:text-gray-700 underline">Property Settings</button>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg p-3 shadow-sm mb-4">
+          <div class="flex justify-between items-center mb-2">
+            <button id="prevMonth_A" class="px-3 py-1 rounded text-white" style="background:var(--brand-dark)">‹ Prev</button>
+            <h2 id="currentMonth_A" class="text-lg font-semibold" style="color:var(--brand-dark)"></h2>
+            <button id="nextMonth_A" class="px-3 py-1 rounded text-white" style="background:var(--brand-dark)">Next ›</button>
+          </div>
+          <div class="grid grid-cols-7 gap-2 text-center font-semibold text-gray-600 mb-2 text-sm">
+            <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+          </div>
+          <div id="calendarGrid_A" class="grid grid-cols-7 gap-2"></div>
+        </div>
+      </div>
+
+      <!-- Calendar B -->
+      <div class="frame flex-1" id="frameB">
+        <div class="text-center mb-4">
+          <h1 id="homestayTitle_B" class="text-2xl font-bold" style="color:var(--brand-dark)">D White Cottage Homestay B</h1>
+          <p id="locationText_B" class="text-sm text-gray-600">Pengkalan Balak, Melaka</p>
+        </div>
+
+        <div class="flex items-center justify-between gap-4 mb-4">
+          <div class="flex items-center gap-4">
+            <div class="flex items-center"><div id="legendAvailable_B" class="w-4 h-4 rounded mr-2" style="background-color:var(--brand-gold)"></div><span class="text-sm">Available (click to book)</span></div>
+            <div class="flex items-center"><div class="w-4 h-4 bg-red-600 rounded mr-2"></div><span class="text-sm">Booked</span></div>
+          </div>
+          <div class="flex items-center gap-3">
+            <a id="bookNowButton_B" class="inline-block px-4 py-2 text-sm font-semibold text-white rounded shadow-lg hover:shadow-xl transition-transform transform hover:scale-105" href="#" target="_blank" rel="noopener noreferrer" style="background:linear-gradient(135deg,var(--book-btn-1) 0%,var(--book-btn-2) 100%);">Book Now</a>
+            <button data-cal="B" class="ownerAccess text-sm text-gray-500 hover:text-gray-700 underline">Property Settings</button>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg p-3 shadow-sm mb-4">
+          <div class="flex justify-between items-center mb-2">
+            <button id="prevMonth_B" class="px-3 py-1 rounded text-white" style="background:var(--brand-dark)">‹ Prev</button>
+            <h2 id="currentMonth_B" class="text-lg font-semibold" style="color:var(--brand-dark)"></h2>
+            <button id="nextMonth_B" class="px-3 py-1 rounded text-white" style="background:var(--brand-dark)">Next ›</button>
+          </div>
+          <div class="grid grid-cols-7 gap-2 text-center font-semibold text-gray-600 mb-2 text-sm">
+            <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+          </div>
+          <div id="calendarGrid_B" class="grid grid-cols-7 gap-2"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Shared Owner Panel -->
+  <div id="ownerPanel" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg shadow-xl max-w-3xl w-full mx-4 p-6">
+      <div class="flex justify-between items-center mb-4">
+        <h3 id="ownerTitle" class="text-xl font-bold" style="color:var(--brand-dark)">Property Settings & Calendar</h3>
+        <button id="closeOwner" class="text-gray-500">✕</button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Settings -->
+        <div>
+          <label class="block text-sm">Homestay Title
+            <input id="inputTitle" class="w-full mt-1 px-3 py-2 border rounded" placeholder="D White Cottage Homestay"></label>
+          <label class="block text-sm mt-3">Location
+            <input id="inputLocation" class="w-full mt-1 px-3 py-2 border rounded" placeholder="Pengkalan Balak, Melaka"></label>
+          <label class="block text-sm mt-3">Contact Number (for WA link)
+            <input id="inputContact" class="w-full mt-1 px-3 py-2 border rounded" placeholder="+60126419484"></label>
+          <label class="block text-sm mt-3">Book Button Text
+            <input id="inputButtonText" class="w-full mt-1 px-3 py-2 border rounded" placeholder="Book Now"></label>
+
+          <div class="mt-4">
+            <p class="text-sm font-semibold mb-2">Page / Theme Colors</p>
+            <div class="grid grid-cols-2 gap-2">
+              <label class="text-xs">Page background<input id="color_page_bg" type="color" class="w-full h-8 mt-1 p-0 border rounded"></label>
+              <label class="text-xs">Brand dark<input id="color_brand_dark" type="color" class="w-full h-8 mt-1 p-0 border rounded"></label>
+              <label class="text-xs">Brand gold<input id="color_brand_gold" type="color" class="w-full h-8 mt-1 p-0 border rounded"></label>
+              <label class="text-xs">Book btn 1<input id="color_btn1" type="color" class="w-full h-8 mt-1 p-0 border rounded"></label>
+              <label class="text-xs">Book btn 2<input id="color_btn2" type="color" class="w-full h-8 mt-1 p-0 border rounded"></label>
+            </div>
+          </div>
+
+          <div class="flex gap-3 justify-end mt-4">
+            <button id="saveSettings" class="px-4 py-2 bg-green-600 text-white rounded">Save</button>
+            <button id="resetSettings" class="px-4 py-2 bg-gray-200 rounded">Reset</button>
+          </div>
+        </div>
+
+        <!-- Owner Calendar (toggle dates) -->
+        <div>
+          <div class="flex justify-between items-center mb-2">
+            <button id="ownerPrevMonth" class="px-3 py-1 rounded text-white" style="background:var(--brand-dark)">‹ Prev</button>
+            <h4 id="ownerCurrentMonth" class="text-sm font-semibold" style="color:var(--brand-dark)"></h4>
+            <button id="ownerNextMonth" class="px-3 py-1 rounded text-white" style="background:var(--brand-dark)">Next ›</button>
+          </div>
+          <div class="grid grid-cols-7 gap-1 text-center font-semibold text-gray-600 mb-1 text-xs">
+            <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
+          </div>
+          <div id="ownerCalendarGrid" class="grid grid-cols-7 gap-1"></div>
+          <p class="text-xs text-gray-500 mt-2">Click a date to toggle between Available / Booked. Booked dates turn red and are not clickable by guests.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Reusable calendar class for two side-by-side calendars with per-calendar localStorage
+    class HomestayCalendar {
+      constructor(suffix){
+        this.suffix = suffix; // 'A' or 'B'
+        this.STORAGE_KEY = `homestay_calendar_${suffix}_v1`;
+        this.defaultConfig = {
+          homestay_title: `D White Cottage Homestay ${suffix}`,
+          location_text: 'Pengkalan Balak, Melaka',
+          contact_number: '+60126419484',
+          booking_button_text: 'Book Now',
+          bookings: [],
+          colors: { page_bg: '#d2cfae', brand_dark: '#615d43', brand_gold:'#bebc57', btn1:'#8B4513', btn2:'#A0522D' }
+        };
+        this.state = this.loadState();
+        this.currentDate = new Date();
+        this.initElements();
+        this.applyConfigToUI();
+        this.updateCalendar();
+      }
+
+      loadState(){
+        try{
+          const raw = localStorage.getItem(this.STORAGE_KEY);
+          if(!raw) return {...this.defaultConfig};
+          const parsed = JSON.parse(raw);
+          return {...this.defaultConfig, ...parsed, bookings: parsed.bookings || [], colors: {...this.defaultConfig.colors, ...(parsed.colors||{})}};
+        }catch(e){console.warn(e); return {...this.defaultConfig};}
+      }
+
+      saveState(){
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.state));
+      }
+
+      initElements(){
+        this.titleEl = document.getElementById(`homestayTitle_${this.suffix}`);
+        this.locationEl = document.getElementById(`locationText_${this.suffix}`);
+        this.bookBtn = document.getElementById(`bookNowButton_${this.suffix}`);
+        this.gridEl = document.getElementById(`calendarGrid_${this.suffix}`);
+        this.currentMonthEl = document.getElementById(`currentMonth_${this.suffix}`);
+
+        // nav buttons
+        document.getElementById(`prevMonth_${this.suffix}`).addEventListener('click', ()=>{this.currentDate.setMonth(this.currentDate.getMonth()-1); this.updateCalendar();});
+        document.getElementById(`nextMonth_${this.suffix}`).addEventListener('click', ()=>{this.currentDate.setMonth(this.currentDate.getMonth()+1); this.updateCalendar();});
+      }
+
+      applyColorsToRoot(){
+        const c = this.state.colors;
+        // apply to document root so both calendars can share theme; user can decide to keep same colors or change per-calendar
+        document.documentElement.style.setProperty('--page-bg', c.page_bg);
+        document.documentElement.style.setProperty('--brand-dark', c.brand_dark);
+        document.documentElement.style.setProperty('--brand-gold', c.brand_gold);
+        document.documentElement.style.setProperty('--book-btn-1', c.btn1);
+        document.documentElement.style.setProperty('--book-btn-2', c.btn2);
+      }
+
+      applyConfigToUI(){
+        this.applyColorsToRoot();
+        this.titleEl.textContent = this.state.homestay_title;
+        this.locationEl.textContent = this.state.location_text;
+        const contactNum = (this.state.contact_number || this.defaultConfig.contact_number).replace(/[^0-9]/g,'');
+        this.bookBtn.textContent = this.state.booking_button_text || this.defaultConfig.booking_button_text;
+        this.bookBtn.href = `https://wa.me/${contactNum}`;
+      }
+
+      updateCalendar(){
+        this.gridEl.innerHTML = '';
+        const year = this.currentDate.getFullYear();
+        const month = this.currentDate.getMonth();
+        const firstDay = new Date(year, month, 1);
+        const startDate = new Date(firstDay); startDate.setDate(startDate.getDate() - firstDay.getDay());
+        const today = new Date(); today.setHours(0,0,0,0);
+        for(let i=0;i<42;i++){
+          const cellDate = new Date(startDate); cellDate.setDate(startDate.getDate() + i);
+          const cell = document.createElement('div');
+          cell.className = 'calendar-day text-center py-3 rounded-lg font-medium';
+          cell.textContent = cellDate.getDate();
+
+          const dateStr = cellDate.toISOString().split('T')[0];
+          const booking = this.state.bookings.find(b=>b.date===dateStr);
+          const isCurrentMonth = cellDate.getMonth()===month;
+          const isToday = cellDate.getTime()===today.getTime();
+          const isPast = cellDate < today;
+
+          if(!isCurrentMonth){
+            cell.className += ' text-gray-300';
+          } else if(isPast){
+            cell.className += ' text-gray-400 bg-gray-100';
+          } else if(booking && booking.status==='booked'){
+            cell.className += ' booked';
+          } else {
+            cell.className += ' available';
+            cell.addEventListener('click', ()=>{
+              const contactNum = (this.state.contact_number || this.defaultConfig.contact_number).replace(/[^0-9]/g,'');
+              const message = encodeURIComponent(`Hi, I'd like to book ${this.state.homestay_title} on ${dateStr}.`);
+              window.open(`https://wa.me/${contactNum}?text=${message}`,'_blank','noopener');
+            });
+          }
+
+          if(isToday) cell.className += ' today';
+          this.gridEl.appendChild(cell);
+        }
+
+        const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+        this.currentMonthEl.textContent = `${monthNames[this.currentDate.getMonth()]} ${this.currentDate.getFullYear()}`;
+      }
+
+      // owner calendar actions used by shared owner panel
+      ownerRenderMonth(ownerGridEl, ownerDate){
+        ownerGridEl.innerHTML = '';
+        const year = ownerDate.getFullYear();
+        const month = ownerDate.getMonth();
+        const firstDay = new Date(year, month, 1);
+        const startDate = new Date(firstDay); startDate.setDate(startDate.getDate() - firstDay.getDay());
+        const today = new Date(); today.setHours(0,0,0,0);
+        for(let i=0;i<42;i++){
+          const cellDate = new Date(startDate); cellDate.setDate(startDate.getDate() + i);
+          const cell = document.createElement('div');
+          cell.className = 'calendar-day text-center py-2 rounded font-medium cursor-pointer text-sm';
+          cell.textContent = cellDate.getDate();
+
+          const dateStr = cellDate.toISOString().split('T')[0];
+          const booking = this.state.bookings.find(b=>b.date===dateStr);
+          const isCurrentMonth = cellDate.getMonth()===month;
+          const isPast = cellDate < today;
+
+          if(!isCurrentMonth){ cell.className += ' text-gray-300'; }
+          else if(isPast){ cell.className += ' text-gray-400 bg-gray-100 cursor-not-allowed'; }
+          else if(booking && booking.status==='booked'){
+            cell.className += ' booked';
+            cell.title = 'Booked — click to make available';
+            cell.addEventListener('click', ()=>{ this.state.bookings = this.state.bookings.filter(b=>b.date!==dateStr); this.saveState(); this.applyConfigToUI(); this.updateCalendar(); this.ownerRenderMonth(ownerGridEl, ownerDate); });
+          } else {
+            cell.className += ' available text-white';
+            cell.title = 'Available — click to mark booked';
+            cell.addEventListener('click', ()=>{ this.state.bookings.push({date:dateStr, status:'booked'}); this.state.bookings = this.state.bookings.filter((v,i,a)=>a.findIndex(x=>x.date===v.date)===i); this.saveState(); this.applyConfigToUI(); this.updateCalendar(); this.ownerRenderMonth(ownerGridEl, ownerDate); });
+          }
+
+          ownerGridEl.appendChild(cell);
+        }
+      }
+    }
+
+    // Instantiate two calendars
+    const calA = new HomestayCalendar('A');
+    const calB = new HomestayCalendar('B');
+
+    // Shared owner panel logic
+    let activeCal = null; // will be calA or calB
+    const ownerPanel = document.getElementById('ownerPanel');
+    const ownerCalendarGrid = document.getElementById('ownerCalendarGrid');
+    let ownerDate = new Date();
+
+    document.querySelectorAll('.ownerAccess').forEach(btn=>{
+      btn.addEventListener('click', (e)=>{
+        const which = btn.getAttribute('data-cal');
+        const pwd = prompt('Enter owner password to edit settings:');
+        if(pwd===null) return;
+        if(pwd!=='donotopen5858'){ alert('Incorrect password'); return; }
+        activeCal = which==='A' ? calA : calB;
+        openOwnerPanel();
+      });
+    });
+
+    function openOwnerPanel(){
+      ownerPanel.classList.remove('hidden');
+      // populate inputs from activeCal.state
+      document.getElementById('inputTitle').value = activeCal.state.homestay_title;
+      document.getElementById('inputLocation').value = activeCal.state.location_text;
+      document.getElementById('inputContact').value = activeCal.state.contact_number;
+      document.getElementById('inputButtonText').value = activeCal.state.booking_button_text;
+      // colors
+      document.getElementById('color_page_bg').value = rgbToHex(activeCal.state.colors.page_bg || getComputedStyle(document.documentElement).getPropertyValue('--page-bg'));
+      document.getElementById('color_brand_dark').value = rgbToHex(activeCal.state.colors.brand_dark || getComputedStyle(document.documentElement).getPropertyValue('--brand-dark'));
+      document.getElementById('color_brand_gold').value = rgbToHex(activeCal.state.colors.brand_gold || getComputedStyle(document.documentElement).getPropertyValue('--brand-gold'));
+      document.getElementById('color_btn1').value = rgbToHex(activeCal.state.colors.btn1 || getComputedStyle(document.documentElement).getPropertyValue('--book-btn-1'));
+      document.getElementById('color_btn2').value = rgbToHex(activeCal.state.colors.btn2 || getComputedStyle(document.documentElement).getPropertyValue('--book-btn-2'));
+
+      // sync owner month
+      ownerDate = new Date(activeCal.currentDate);
+      ownerRender();
+    }
+
+    function ownerRender(){
+      document.getElementById('ownerCurrentMonth').textContent = activeCal ? `${['January','February','March','April','May','June','July','August','September','October','November','December'][ownerDate.getMonth()]} ${ownerDate.getFullYear()}` : '';
+      if(activeCal) activeCal.ownerRenderMonth(ownerCalendarGrid, ownerDate);
+    }
+
+    document.getElementById('closeOwner').addEventListener('click', ()=> ownerPanel.classList.add('hidden'));
+    document.getElementById('ownerPrevMonth').addEventListener('click', ()=>{ ownerDate.setMonth(ownerDate.getMonth()-1); ownerRender(); });
+    document.getElementById('ownerNextMonth').addEventListener('click', ()=>{ ownerDate.setMonth(ownerDate.getMonth()+1); ownerRender(); });
+
+    document.getElementById('resetSettings').addEventListener('click', ()=>{
+      if(!activeCal) return;
+      if(confirm('Reset settings to defaults for this calendar?')){ activeCal.state = {...activeCal.defaultConfig}; activeCal.saveState(); activeCal.applyConfigToUI(); activeCal.updateCalendar(); ownerPanel.classList.add('hidden'); }
+    });
+
+    document.getElementById('saveSettings').addEventListener('click', ()=>{
+      if(!activeCal) return;
+      const t = document.getElementById('inputTitle').value.trim() || activeCal.defaultConfig.homestay_title;
+      const l = document.getElementById('inputLocation').value.trim() || activeCal.defaultConfig.location_text;
+      const c = document.getElementById('inputContact').value.trim() || activeCal.defaultConfig.contact_number;
+      const b = document.getElementById('inputButtonText').value.trim() || activeCal.defaultConfig.booking_button_text;
+      activeCal.state.homestay_title = t; activeCal.state.location_text = l; activeCal.state.contact_number = c; activeCal.state.booking_button_text = b;
+      // colors
+      activeCal.state.colors.page_bg = document.getElementById('color_page_bg').value;
+      activeCal.state.colors.brand_dark = document.getElementById('color_brand_dark').value;
+      activeCal.state.colors.brand_gold = document.getElementById('color_brand_gold').value;
+      activeCal.state.colors.btn1 = document.getElementById('color_btn1').value;
+      activeCal.state.colors.btn2 = document.getElementById('color_btn2').value;
+
+      activeCal.saveState();
+      // apply to active calendar and also update other calendar UI so colors are visible immediately
+      activeCal.applyConfigToUI(); activeCal.updateCalendar();
+      // also update other calendar's visual styles (so both reflect CSS vars)
+      (activeCal===calA?calB:calA).applyColorsToRoot();
+      (activeCal===calA?calB:calA).updateCalendar();
+
+      ownerPanel.classList.add('hidden');
+    });
+
+    // small helper to convert rgb/var to hex
+    function rgbToHex(input){
+      input = (input||'').trim();
+      if(!input) return '#ffffff';
+      if(input.startsWith('#')) return input;
+      // handle var(...) or rgb(...)
+      if(input.startsWith('var(')){
+        const prop = input.replace(/var\(|\)/g,'').trim();
+        input = getComputedStyle(document.documentElement).getPropertyValue(prop) || input;
+      }
+      const m = input.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+      if(m) return `#${((1<<24)+(parseInt(m[1])<<16)+(parseInt(m[2])<<8)+parseInt(m[3])).toString(16).slice(1)}`;
+      return '#ffffff';
+    }
+
+    // Expose API for host editors
+    window.HomestayCalendars = {
+      getState: (which)=> JSON.parse(localStorage.getItem(`homestay_calendar_${which}_v1`) || JSON.stringify(which==='A'?calA.defaultConfig:calB.defaultConfig)),
+      setState: (which,obj)=>{ const cal = which==='A'?calA:calB; cal.state = {...cal.state,...obj}; cal.saveState(); cal.applyConfigToUI(); cal.updateCalendar(); }
+    };
+
+  </script>
+</body>
+</html>
